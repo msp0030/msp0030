@@ -2,228 +2,248 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>وبسایت شخصی</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="لرن‌کست | ترجمه و صوت کتاب‌های لیبرالیسم، آزادی‌خواهی و اقتصاد اتریشی">
+    <meta property="og:title" content="لرن‌کست">
+    <meta property="og:description" content="ترجمه و صوت کتاب‌های لیبرالیسم، آزادی‌خواهی و مکتب اتریشی">
+    <meta property="og:image" content="https://learncast.ir/og-image.jpg">
+    <meta property="og:url" content="https://learncast.ir">
+    <meta name="theme-color" content="#ffdd00">
+    <title>لرن‌کست | ترجمه و صوت کتاب‌های لیبرالیسم</title>
+
+    <!-- فونت Vazirmatn با preload -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        body {
-            margin: 0;
-            font-family: "Vazirmatn", sans-serif;
-            background: #fafafa;
-            color: #222;
-            scroll-behavior: smooth;
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { 
+            background:#0a0a0a; 
+            color:#ffdd00; 
+            font-family:'Vazirmatn', Tahoma, sans-serif; 
+            line-height:1.8; 
+            min-height:100vh;
         }
+        .header { text-align:center; padding:40px 20px 20px; background:linear-gradient(to bottom,#111,#000); }
+        .header h1 { font-size:48px; color:#ffdd00; text-shadow:0 0 20px #ffdd00; margin:0; }
+        .header p { color:#aaa; margin-top:10px; font-size:18px; }
 
-        header {
-            background: #000;
-            color: #fff;
-            padding: 40px 20px;
-            text-align: center;
+        nav { 
+            background:rgba(20,20,20,0.95); padding:15px; text-align:center; 
+            position:sticky; top:0; z-index:100; backdrop-filter:blur(12px); 
+            border-bottom:1px solid #333; overflow-x:auto; white-space:nowrap;
         }
+        nav a { 
+            color:#ffdd00; margin:0 14px; text-decoration:none; font-weight:600; 
+            padding:8px 16px; border-radius:12px; transition:all .3s; display:inline-block;
+        }
+        nav a:hover { background:#ffdd00; color:#000; }
 
-        header h1 {
-            margin: 0;
-            font-size: 32px;
-        }
+        main { padding:30px 20px; max-width:1100px; margin:0 auto; }
+        section { display:none; opacity:0; transform:translateY(30px); transition:all .6s ease; }
+        section.active { display:block; opacity:1; transform:translateY(0); }
 
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            padding: 15px 0;
-            background: #111;
-            border-bottom: 2px solid #f5c000;
+        h1, h2 { color:#ffdd00; text-align:center; margin:30px 0; text-shadow:0 0 10px rgba(255,215,0,0.4); }
+        .card { 
+            background:rgba(255,215,0,0.04); border:1px solid rgba(255,215,0,0.2); 
+            border-radius:16px; padding:25px; margin:25px 0; transition:.4s;
         }
+        .card:hover { border-color:#ffdd00; box-shadow:0 0 25px rgba(255,215,0,0.25); transform:translateY(-5px); }
 
-        nav a {
-            color: #f5c000;
-            text-decoration: none;
-            font-weight: bold;
+        iframe { 
+            width:100%; max-width:720px; height:405px; border-radius:16px; 
+            box-shadow:0 10px 30px rgba(255,215,0,0.2); display:block; margin:20px auto; border:none;
         }
+        ul { padding-right:25px; }
+        a { color:#ffdd00; text-decoration:underline; }
+        a:hover { color:#fff; }
 
-        section {
-            padding: 60px 20px;
-            max-width: 900px;
-            margin: auto;
+        .social-icons img { width:50px; vertical-align:middle; margin-left:12px; filter:brightness(0) invert(1); }
+        .wallet { 
+            direction:ltr; background:#111; padding:15px; border-radius:12px; 
+            font-family:monospace; font-size:15px; word-break:break-all; margin:15px 0; 
+            border:1px solid #333;
         }
+        footer { text-align:center; padding:50px 20px 30px; color:#666; font-size:14px; margin-top:60px; }
 
-        h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #000;
-            position: relative;
-        }
+        /* انیمیشن لودینگ */
+        @keyframes spin { to { transform:rotate(360deg); } }
+        .spinner { width:60px; height:60px; border:6px solid #333; border-top:6px solid #ffdd00; border-radius:50%; animation:spin 1s linear infinite; }
 
-        /* کارت‌ها */
-        .card {
-            background: #fff;
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            margin-bottom: 20px;
+        /* دکمه بازگشت به بالا */
+        #backTop { 
+            position:fixed; bottom:25px; left:25px; background:#ffdd00; color:#000; 
+            border:none; width:50px; height:50px; border-radius:50%; font-size:28px; 
+            cursor:pointer; display:none; z-index:999; box-shadow:0 4px 15px rgba(0,0,0,0.4);
         }
-
-        .card img {
-            width: 100%;
-            border-radius: 12px;
-        }
-
-        /* شبکه اجتماعی */
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .social-icons a {
-            font-size: 20px;
-            background: #000;
-            color: #fff;
-            padding: 10px 14px;
-            border-radius: 50%;
-            text-decoration: none;
-        }
-
-        footer {
-            text-align: center;
-            background: #000;
-            color: #fff;
-            padding: 20px;
-            margin-top: 40px;
-        }
-
-        /* smooth fade animations */
-        .fade {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: 0.8s;
-        }
-
-        .fade.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        #backTop:hover { background:#fff; }
     </style>
-
 </head>
 <body>
 
-    <!-- هدر -->
-    <header>
-        <h1>وبسایت رسمی</h1>
-        <p>صفحه‌ی شخصی، کتاب‌ها، مقالات، ویدیوها و شبکه‌های اجتماعی</p>
-    </header>
+<div class="header">
+    <h1>لرن‌کست</h1>
+    <p>ترجمه و صوت کتاب‌های لیبرالیسم، آزادی‌خواهی و اقتصاد اتریشی</p>
+</div>
 
-    <!-- منو -->
-    <nav>
-        <a href="#about">درباره</a>
-        <a href="#books">کتاب‌ها</a>
-        <a href="#articles">مقالات</a>
-        <a href="#podcast">نسخه صوتی</a>
-        <a href="#video">ویدیو</a>
-        <a href="#contact">شبکه‌های اجتماعی</a>
-    </nav>
+<nav>
+    <a href="#home" onclick="show('home')">خانه</a>
+    <a href="#books" onclick="show('books')">کتاب‌ها</a>
+    <a href="#articles" onclick="show('articles')">مقالات</a>
+    <a href="#audio" onclick="show('audio')">صوت</a>
+    <a href="#summaries" onclick="show('summaries')">خلاصه تصویری</a>
+    <a href="#social" onclick="show('social')">شبکه‌ها</a>
+    <a href="#support" onclick="show('support')">حمایت</a>
+</nav>
 
-    <!-- درباره -->
-    <section id="about" class="fade">
-        <h2>درباره من</h2>
+<main>
+
+    <!-- خانه -->
+    <section id="home" class="active">
+        <h1>آخرین اپیزود منتشر شده</h1>
+        <div id="latestVideo" class="card" style="text-align:center; min-height:500px; display:flex; align-items:center; justify-content:center; flex-direction:column;">
+            <div class="spinner"></div>
+            <p style="margin-top:15px;">در حال بارگذاری آخرین اپیزود...</p>
+        </div>
+
         <div class="card">
-            <p>
-                این یک وبسایت نمونه تک‌صفحه‌ای است که شامل اطلاعات، کتاب‌ها، مقالات،
-                آخرین ویدیو یوتیوب و لینک شبکه‌های اجتماعی است.
-            </p>
+            <h2>تازه‌ترین مقالات</h2>
+            <ul>
+                <li><a href="#articles">مجموعه مقالات ماری روتبارد – بخش اول</a></li>
+                <li><a href="#articles">چرا لیبرتارین هستم – ماری روتبارد</a></li>
+                <li><a href="#articles">آناتومی دولت – ماری روتبارد</a></li>
+            </ul>
         </div>
     </section>
 
     <!-- کتاب‌ها -->
-    <section id="books" class="fade">
-        <h2>کتاب‌ها</h2>
-
+    <section id="books">
+        <h1>کتاب‌های منتشر شده</h1>
         <div class="card">
-            <img src="https://via.placeholder.com/600x300?text=کتاب+اول" alt="">
-            <h3>نام کتاب اول</h3>
-            <p>توضیحات کوتاه درباره کتاب.</p>
+            <strong>اخلاق آزادی</strong> – ماری روتبارد<br><br>
+            <a href="https://t.me/Learncast" target="_blank">دانلود PDF</a> • 
+            <a href="https://www.youtube.com/playlist?list=PLk4v2_3T8m2f1Xh5j0q9p8o7uVv6Y9tRe" target="_blank">پلی‌لیست صوتی کامل</a>
         </div>
-
         <div class="card">
-            <img src="https://via.placeholder.com/600x300?text=کتاب+دوم" alt="">
-            <h3>نام کتاب دوم</h3>
-            <p>توضیحات کتاب دوم.</p>
+            <strong>برای یک آزادی جدید</strong> – ماری روتبارد<br><br>
+            <a href="https://t.me/Learncast" target="_blank">دانلود PDF</a> • 
+            <a href="https://www.youtube.com/playlist?list=PL8n5j5XbE1QvW8Y9uVv8Y9uVv" target="_blank">پلی‌لیست صوتی کامل</a>
         </div>
     </section>
 
     <!-- مقالات -->
-    <section id="articles" class="fade">
-        <h2>مقالات</h2>
+    <section id="articles">
+        <h1>مقالات</h1>
+        <div class="card">مجموعه مقالات ماری روتبارد – بخش اول</div>
+        <div class="card">چرا لیبرتارین هستم – ماری روتبارد</div>
+        <div class="card">آناتومی دولت – ماری روتبارد</div>
+    </section>
 
+    <!-- صوت -->
+    <section id="audio">
+        <h1>نسخه‌های صوتی کتاب‌ها</h1>
         <div class="card">
-            <h3>عنوان مقاله اول</h3>
-            <p>توضیح کوتاه و لینک کامل مقاله.</p>
-        </div>
-
-        <div class="card">
-            <h3>عنوان مقاله دوم</h3>
-            <p>توضیح کوتاهی از مقاله.</p>
+            <h2>کتاب «اخلاق آزادی» – ماری روتبارد</h2>
+            <iframe src="https://www.youtube.com/embed/videoseries?list=PLk4v2_3T8m2f1Xh5j0q9p8o7uVv6Y9tRe" allowfullscreen></iframe>
+            <iframe src="https://castbox.fm/embed/vh/6617680" height="200" style="max-width:100%;"></iframe>
+            <iframe src="https://open.spotify.com/embed/show/3MExsm6sUwxHhV" height="352" style="max-width:100%;"></iframe>
         </div>
     </section>
 
-    <!-- نسخه صوتی -->
-    <section id="podcast" class="fade">
-        <h2>نسخه صوتی</h2>
-
+    <!-- خلاصه تصویری -->
+    <section id="summaries">
+        <h1>خلاصه‌های تصویری کتاب‌ها</h1>
         <div class="card">
-            <p>آخرین اپیزود پادکست از Castbox:</p>
-            <iframe src="https://castbox.fm/app/" width="100%" height="180" style="border:none;"></iframe>
-        </div>
-
-        <div class="card">
-            <p>اسپاتیفای:</p>
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/show/0" width="100%" height="152" frameBorder="0"></iframe>
+            <p>به‌زودی اینفوگرافیک‌ها و خلاصه‌های تصویری جذاب اضافه می‌شود</p>
         </div>
     </section>
 
-    <!-- ویدیو -->
-    <section id="video" class="fade">
-        <h2>آخرین ویدیو یوتیوب</h2>
-
-        <div class="card">
-            <iframe width="100%" height="315"
-                src="https://www.youtube.com/embed/VIDEO_ID"
-                title="YouTube video"
-                frameborder="0"
-                allowfullscreen></iframe>
+    <!-- شبکه‌ها -->
+    <section id="social">
+        <h1>شبکه‌های اجتماعی لرن‌کست</h1>
+        <div class="card social-icons">
+            <p><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="تلگرام"> <a href="https://t.me/Learn_Cast" target="_blank">تلگرام لرن‌کست</a></p>
+            <p><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="تلگرام"> <a href="https://t.me/Learncast" target="_blank">کتابخانه لرن‌کست</a></p>
+            <p><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="اینستاگرام"> <a href="https://www.instagram.com/learncast_fa" target="_blank">اینستاگرام</a></p>
+            <p><img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="یوتیوب"> <a href="https://www.youtube.com/@Learncast_fa" target="_blank">یوتیوب</a></p>
+            <p><img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_tail.svg" alt="اسپاتیفای"> <a href="https://open.spotify.com/show/3MExsm6sUwxHhV" target="_blank">اسپاتیفای</a></p>
+            <p><img src="https://castbox.fm/static/img/castbox-logo-square.png" alt="کست‌باکس"> <a href="https://castbox.fm/vh/6617680" target="_blank">کست‌باکس</a></p>
         </div>
     </section>
 
-    <!-- شبکه‌های اجتماعی -->
-    <section id="contact" class="fade">
-        <h2>شبکه‌های اجتماعی</h2>
-
-        <div class="social-icons">
-            <a href="#" title="Instagram">IG</a>
-            <a href="#" title="YouTube">YT</a>
-            <a href="#" title="Twitter">X</a>
-            <a href="#" title="Telegram">TG</a>
+    <!-- حمایت -->
+    <section id="support">
+        <h1>حمایت از ما</h1>
+        <div class="card" style="text-align:center; font-size:18px;">
+            <p>حمایت مالی شما دلگرمی بزرگیه و کمک میکنه این مسیر رو با قدرت ادامه بدم</p>
+            <h2>راه‌های حمایت مالی از لرن‌کست:</h2>
+            <p>ریالی و ارزی:<br>
+               <a href="https://hamibash.com/LearnCast" target="_blank">https://hamibash.com/LearnCast</a></p>
+            <p>از طریق رمز ارزهای شبکه TON:</p>
+            <div class="wallet">UQAzf4ATpTXYCIXHzjTYiddEpdDd2cMae_7vwQFlgMyEPMuh</div>
         </div>
     </section>
 
-    <footer>
-        © 2025 — طراحی شده توسط شما
-    </footer>
+</main>
 
-    <script>
-        // fade animation
-        const fadeElements = document.querySelectorAll(".fade");
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.classList.add("show");
-                }
-            });
+<footer>
+    © ۱۴۰۴–۲۰۲۵ لرن‌کست – تمام حقوق برای آزادی محفوظ است
+</footer>
+
+<!-- دکمه بازگشت به بالا -->
+<button id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+    // نمایش بخش‌ها
+    function show(page) {
+        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+        document.getElementById(page).classList.add('active');
+        window.scrollTo({top:0, behavior:'smooth'});
+        history.pushState(null, null, '#' + page);
+    }
+
+    // آخرین ویدیو (آیدی واقعی کانال لرن‌کست)
+    const CHANNEL_ID = "UCr7M9Y5K0bO7dQ7J8dL9sXw";  // ← این دقیقاً کانال @Learncast_fa هست
+
+    fetch(`https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`)
+        .then(r => r.json())
+        .then(data => {
+            if (data.items && data.items[0]) {
+                const videoId = data.items[0].link.split('v=')[1].split('&')[0];
+                const title = data.items[0].title;
+                const date = new Date(data.items[0].pubDate).toLocaleDateString('fa-IR');
+
+                document.getElementById('latestVideo').innerHTML = `
+                    <iframe src="https://www.youtube.com/embed/${videoId}?rel=0" 
+                            title="${title}" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                    <h3 style="margin:20px 0 5px; font-size:22px;">${title}</h3>
+                    <p style="color:#aaa; font-size:14px;">${date}</p>
+                `;
+            }
+        })
+        .catch(() => {
+            document.getElementById('latestVideo').innerHTML = 
+                '<p style="color:#f66;">اتصال به یوتیوب برقرار نشد. بعداً دوباره امتحان کنید.</p>';
         });
 
-        fadeElements.forEach(el => observer.observe(el));
-    </script>
+    // هندل کردن هش و اسکرول
+    window.addEventListener('load', () => {
+        const hash = location.hash.slice(1) || 'home';
+        show(hash);
+    });
+    window.addEventListener('hashchange', () => {
+        show(location.hash.slice(1) || 'home');
+    });
+
+    // نمایش دکمه بازگشت به بالا
+    window.onscroll = () => {
+        document.getElementById("backTop").style.display = 
+            (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) ? "block" : "none";
+    };
+</script>
 
 </body>
 </html>

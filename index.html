@@ -102,9 +102,15 @@
     <!-- خانه -->
     <section id="home" class="active">
         <h1>آخرین اپیزود منتشر شده</h1>
-        <div id="latestVideo" class="card" style="text-align:center; min-height:500px; display:flex; align-items:center; justify-content:center; flex-direction:column;">
-            <div class="spinner"></div>
-            <p style="margin-top:15px;">در حال بارگذاری آخرین اپیزود...</p>
+        <!-- placeholder موقت - VIDEO_ID و عنوان رو عوض کن -->
+        <div id="latestVideo" class="card" style="text-align:center;">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" 
+                    title="آخرین اپیزود (placeholder)" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen></iframe>
+            <h3 style="margin:20px 0 5px; font-size:22px;">عنوان آخرین اپیزود (موقت)</h3>
+            <p style="color:#aaa; font-size:14px;">۲۵ آبان ۱۴۰۴</p>
+            <p style="color:#f66; font-size:14px; margin-top:10px;">نکته: برای فعال‌سازی خودکار، آیدی کانال رو در اسکریپت بذار</p>
         </div>
 
         <div class="card">
@@ -117,7 +123,7 @@
         </div>
     </section>
 
-    <!-- کتاب‌ها -->
+    <!-- بقیه بخش‌ها مثل قبل... (کپی از نسخه قبلی) -->
     <section id="books">
         <h1>کتاب‌های منتشر شده</h1>
         <div class="card">
@@ -132,7 +138,6 @@
         </div>
     </section>
 
-    <!-- مقالات -->
     <section id="articles">
         <h1>مقالات</h1>
         <div class="card">مجموعه مقالات ماری روتبارد – بخش اول</div>
@@ -140,7 +145,6 @@
         <div class="card">آناتومی دولت – ماری روتبارد</div>
     </section>
 
-    <!-- صوت -->
     <section id="audio">
         <h1>نسخه‌های صوتی کتاب‌ها</h1>
         <div class="card">
@@ -151,7 +155,6 @@
         </div>
     </section>
 
-    <!-- خلاصه تصویری -->
     <section id="summaries">
         <h1>خلاصه‌های تصویری کتاب‌ها</h1>
         <div class="card">
@@ -159,7 +162,6 @@
         </div>
     </section>
 
-    <!-- شبکه‌ها -->
     <section id="social">
         <h1>شبکه‌های اجتماعی لرن‌کست</h1>
         <div class="card social-icons">
@@ -172,7 +174,6 @@
         </div>
     </section>
 
-    <!-- حمایت -->
     <section id="support">
         <h1>حمایت از ما</h1>
         <div class="card" style="text-align:center; font-size:18px;">
@@ -203,8 +204,9 @@
         history.pushState(null, null, '#' + page);
     }
 
-    // آخرین ویدیو (آیدی واقعی کانال لرن‌کست)
-    const CHANNEL_ID = "UCr7M9Y5K0bO7dQ7J8dL9sXw";  // ← این دقیقاً کانال @Learncast_fa هست
+    // اسکریپت خودکار آخرین ویدیو - فعلاً کامنت شده، آیدی رو بذار و uncomment کن
+    /*
+    const CHANNEL_ID = "UCyour_real_id_here";  // ← آیدی واقعی رو بذار
 
     fetch(`https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`)
         .then(r => r.json())
@@ -228,6 +230,7 @@
             document.getElementById('latestVideo').innerHTML = 
                 '<p style="color:#f66;">اتصال به یوتیوب برقرار نشد. بعداً دوباره امتحان کنید.</p>';
         });
+    */
 
     // هندل کردن هش و اسکرول
     window.addEventListener('load', () => {
